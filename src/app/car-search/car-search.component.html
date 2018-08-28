@@ -1,0 +1,20 @@
+<div class="search-component">
+  <div style="text-align:center" class="mat-title">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Find a car" #searchBox id="search-box" (keyup)="search(searchBox.value)">
+    </mat-form-field>
+  </div>
+
+  <mat-list>
+    <mat-list-item *ngFor="let car of cars" routerLink="/details/{{car.id}}" class="found-car">
+      <img matListAvatar [src]="car.carImage.carImgUrl" alt="...">
+      <h3 matLine> {{car.make}} {{car.model}} {{car.engineVolume.toFixed(2)}} {{car.engineDescription}} </h3>
+      <p matLine>
+        <span> {{car.mfy}} </span>
+        <span class="demo-2"> Price: {{car.retailPrice}} </span>
+      </p>
+    </mat-list-item>
+  </mat-list>
+
+</div>
+

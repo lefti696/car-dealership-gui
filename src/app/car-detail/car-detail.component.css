@@ -1,0 +1,45 @@
+.car-details-card{
+  /*max-width: 800px;*/
+  width: 50%;
+  margin: 10px auto;
+}
+
+.car-details-fab{
+  position: absolute;
+  right: 20%;
+  margin: 10px auto;
+}
+
+.fab {
+  position: fixed;
+  width: 56px;
+  left: 50%;
+  bottom: 100px;
+  margin-left: -28px;
+}
+
+.car-details-card:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  background-color: #e8eaf6;
+}
+
+.center-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.notice-that {
+  color: #cc0000;
+  font-weight: bold;
+}
+
+.notice-that-2 {
+  color: #002b70;
+  font-weight: bold;
+}
+
+.details-list {
+  max-width: 50%;
+  margin: 10px auto;
+}

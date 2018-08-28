@@ -1,0 +1,21 @@
+
+<div style="text-align:center" class="mat-title">
+  <h1>{{ title }}</h1>
+</div>
+
+
+<br>
+<div *ngIf="msg" style="text-align:center" class="mat-title"><font color="#cc0000"><h5>{{msg}}</h5></font></div>
+<p>
+  <!--mozna dodac parametr width="300"-->
+  <img src="../assets/img/vintage-car-dealership-light.jpg" alt="welcome screen image" class="center-image stretch">
+</p>
+
+<br>
+
+<div class="mat-typography center-button">
+  <button mat-raised-button routerLink="/car-list" color="primary"
+          matBadge="{{numberOfAvailableCars}}" matBadgeSize="large" matBadgePosition="before" matBadgeColor="accent">
+    Find your dream car
+  </button>
+</div>

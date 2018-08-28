@@ -1,0 +1,139 @@
+<div>
+  <button mat-raised-button color="primary" (click)="goBack()">go back to list</button>
+</div>
+
+<div *ngIf="car">
+  <mat-card class="car-details-card">
+    <mat-card-header>
+      <mat-card-title><h2>{{matCardTitle}}</h2></mat-card-title>
+      <mat-card-subtitle><h3>{{car.make}} {{car.model}}</h3>
+      <br><mat-checkbox [(ngModel)]="car.recommended">Promote</mat-checkbox>
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <ul class="list-of-errors">
+        <li *ngFor="let err of validationErr">
+          <div *ngIf="err" style="text-align:center"><font color="#cc0000">{{err}}</font></div>
+        </li>
+      </ul>
+
+      <mat-grid-list cols="2">
+        <!--left side -->
+        <mat-grid-tile>
+          <mat-list>
+            <mat-list-item>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Car make:" [(ngModel)]="car.make">
+              </mat-form-field>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Car model:" [(ngModel)]="car.model">
+              </mat-form-field>
+            </mat-list-item>
+
+            <!--engineVolume: number;-->
+            <mat-list-item>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Engine:" [(ngModel)]="car.engineVolume">
+              </mat-form-field>
+            </mat-list-item>
+
+            <!--engineDescription: string;-->
+            <mat-list-item>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Engine desc:" [(ngModel)]="car.engineDescription">
+              </mat-form-field>
+            </mat-list-item>
+
+          </mat-list>
+        </mat-grid-tile>
+
+        <!--right side-->
+        <mat-grid-tile>
+          <mat-list>
+
+            <mat-list-item>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Color of a car:" [(ngModel)]="car.color">
+              </mat-form-field>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Manufacture year:" [(ngModel)]="car.mfy">
+              </mat-form-field>
+            </mat-list-item>
+            <!--basePrice: number;-->
+            <mat-list-item>
+              <mat-form-field>
+                <input matInput placeholder="Base Price" [(ngModel)]="car.basePrice" type="number" class="example-right-align">
+                <span matSuffix>&nbsp;PLN</span>
+              </mat-form-field>
+            </mat-list-item>
+
+          </mat-list>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <!--description: string;-->
+      <mat-form-field class="example-full-width">
+        <textarea matInput matTextareaAutosize placeholder="Description for buyers" [(ngModel)]="car.description"></textarea>
+      </mat-form-field>
+      <br>
+      <!--sellerNote: string;-->
+      <mat-form-field class="example-full-width">
+        <textarea matInput matTextareaAutosize placeholder="Your private notes" [(ngModel)]="car.sellerNote"></textarea>
+      </mat-form-field>
+
+        <div style="text-align:center" class="mat-title">
+          <h6>Retail price: {{car.retailPrice.toLocaleString()}} [PLN] </h6>
+        </div>
+        <!--retailPrice: number;-->
+        <mat-slider class="center-image"
+          thumbLabel
+          [displayWith]="formatLabel"
+          [tickInterval]="1000"
+          [step]="1000"
+          [min]="sliderMinValue"
+          [max]="sliderMaxValue"
+          [(ngModel)]="car.retailPrice">
+        </mat-slider>
+      <!--image-->
+      <div class="center-image">
+        <br>
+        <img mat-card-image [src]="carImgUrl">
+        <!--file upload-->
+        <br>
+        <div [hidden]="(true)">
+          <input id="input-file-id" multiple type="file" (change)="onFileChange($event)"/>
+        </div>
+        <label for="input-file-id" class="mat-button mat-raised-button">Change car image</label>
+      </div>
+
+    </mat-card-content>
+
+    <mat-card-actions align="start">
+      <div [hidden]="!inEditMode()">
+        <!--editing existing car-->
+        <div class="button-row">
+          <button mat-stroked-button color="primary" routerLink="/dashboard">cancel</button>
+          <button mat-stroked-button color="primary" (click)="edit()">save</button>
+          <button mat-stroked-button color="accent" (click)="delete(car)">DELETE</button>
+        </div>
+      </div>
+      <div [hidden]="inEditMode()">
+        <!--adding new car-->
+        <div class="button-row">
+          <button mat-stroked-button color="primary" routerLink="/dashboard">cancel</button>
+          <button mat-stroked-button color="primary" (click)="addNew()">ADD</button>
+        </div>
+      </div>
+
+    </mat-card-actions>
+
+  </mat-card>
+</div>

@@ -1,0 +1,86 @@
+<div style="text-align:right" class="mat-title">
+  <h4>Car Seller Dashboard</h4>
+  <button mat-raised-button (click)="addNewCar()">Add new car for sale</button>
+</div>
+
+<br>
+<p>
+  <img src="../assets/img/mercedes_banner.JPG" alt="welcome screen image" class="center-image stretch">
+</p>
+
+<div [hidden]="isEmptyList()">
+  <app-question-panel></app-question-panel>
+  <app-selling-statistics></app-selling-statistics>
+  <br>
+  <div style="text-align:center" class="mat-title">
+    <h3>You are currently selling</h3>
+  </div>
+</div>
+<div [hidden]="!isEmptyList()">
+  <div style="text-align:center" class="mat-title">
+    <h3>{{emptyListMsg}}</h3>
+  </div>
+</div>
+
+<ul class="list-of-cars">
+  <li *ngFor="let car of listOfCars">
+
+
+    <mat-card class="car-details-card">
+      <mat-card-header>
+        <mat-card-title><h2>{{car.make}}</h2></mat-card-title>
+        <mat-card-subtitle><h2>{{car.model}}</h2></mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <mat-grid-list cols="2">
+          <!--left side -->
+          <mat-grid-tile>
+            <mat-list>
+              <mat-list-item>Color: {{car.color}}</mat-list-item>
+              <mat-list-item>Engine: {{car.engineVolume}} {{car.engineDescription}}</mat-list-item>
+              <mat-list-item>Mfe year: {{car.mfy}}</mat-list-item>
+              <mat-list-item>Selling price: {{car.retailPrice.toLocaleString()}}</mat-list-item>
+            </mat-list>
+          </mat-grid-tile>
+
+          <!--right side-->
+          <mat-grid-tile>
+            <div *ngIf="car.carImage" align="center">
+              <img [src]="car.carImage.carImgUrl" style="width: 70%; height: 70%">
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <mat-list>
+          <mat-list-item>
+            <p matLine>
+              <span> Personal note: </span>
+            </p>
+            <p matLine>
+              <span class="personal-note"> {{car.sellerNote}} </span>
+            </p>
+          </mat-list-item>
+
+          <mat-list-item>
+            <p matLine>
+              <span> Official description:</span>
+            </p>
+            <p matLine>
+              <span class="description"> {{car.description}} </span>
+            </p>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <button mat-stroked-button color="accent" routerLink="/seller/details/{{car.id}}">Click here to see details or
+          EDIT
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <br><br>
+  </li>
+</ul>

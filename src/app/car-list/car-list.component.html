@@ -1,0 +1,108 @@
+<div style="text-align:center" class="mat-title">
+  <h1>Available cars</h1>
+</div>
+<br>
+<p>
+  <img src="../assets/img/car_list_customer.jpg" alt="welcome screen image" class="center-image stretch">
+</p>
+<app-recommendations></app-recommendations>
+
+<app-car-search></app-car-search>
+
+
+<div style="text-align:center" class="mat-title">
+  <h3>Price filtering</h3>
+</div>
+<mat-form-field>
+  <mat-select placeholder="Select Max Price" [(ngModel)]="maxPriceSelected"
+              (selectionChange)="updatePriceSelection($event)">
+    <mat-option *ngFor="let price of listOfPrices" [value]="price.valueOf()">
+      {{price.toLocaleString()}} zł
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<!--price filtering-->
+<br>
+<mat-form-field>
+  <mat-select placeholder="Select Min Price" [(ngModel)]="minPriceSelected"
+              (selectionChange)="updatePriceSelection($event)">
+    <mat-option *ngFor="let price of listOfPrices" [value]="price.valueOf()">
+      {{price.toLocaleString()}} zł
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<br>
+<mat-slide-toggle (change)="filterResults($event)">Filter results !</mat-slide-toggle>
+<br>
+<br>
+<div *ngIf="filterMsg" style="text-align:center" class="mat-body-1">
+  <p>Displaying cars in price range:</p>
+  <p>{{minPriceSelected.toLocaleString()}} zł - {{maxPriceSelected.toLocaleString()}} zł</p>
+</div>
+
+<div *ngIf="filterErrMsg" style="text-align:center" class="mat-body-1">
+  <font color="#cc0000">{{filterErrMsg}}</font>
+</div>
+
+<div *ngIf="listOfCars.length === 0">
+  <div style="text-align:center" class="mat-title">
+    <h3>There are no cars to display</h3>
+  </div>
+</div>
+
+<!--list of cars-->
+<ul class="list-of-cars">
+  <li *ngFor="let car of listOfCars">
+
+    <mat-card class="car-details-card">
+      <mat-card-header>
+        <mat-card-title><h2>{{car.make}}</h2></mat-card-title>
+        <mat-card-subtitle><h2>{{car.model}}</h2></mat-card-subtitle>
+
+        <!--favorite button-->
+        <div [hidden]="!isSessionAvailable()">
+          <mat-icon color="warn" (click)="toggleFavorite(car)">{{car.isFavorite ? 'favorite' : 'favorite_border'}}
+          </mat-icon>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <mat-grid-list cols="2">
+          <!--left side -->
+          <mat-grid-tile>
+            <mat-list>
+              <mat-list-item>Color: {{car.color}}</mat-list-item>
+              <mat-list-item>Engine: {{car.engineVolume}} {{car.engineDescription}}</mat-list-item>
+              <mat-list-item>Mfe year: {{car.mfy}}</mat-list-item>
+            </mat-list>
+          </mat-grid-tile>
+
+          <!--right side-->
+          <mat-grid-tile>
+            <div *ngIf="car.carImage" align="center">
+              <img [src]="car.carImage.carImgUrl" style="width: 85%; height: 85%">
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <div style="text-align:center" class="mat-title">
+          Our best price: <h4>{{car.retailPrice.toLocaleString()}} zł</h4>
+        </div>
+
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+
+        <div class="button-row">
+          <button mat-stroked-button color="accent" routerLink="/details/{{car.id}}">
+            Click here to see detailed description
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+
+    <br><br>
+  </li>
+</ul>
