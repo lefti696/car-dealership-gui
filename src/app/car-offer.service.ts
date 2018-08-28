@@ -9,7 +9,7 @@ import {Question} from '../question';
 })
 export class CarOfferService {
 
-  private carDealershipAppUrl = '//localhost:8080';
+  private carDealershipAppUrl = '//car-dealership.herokuapp.com';
 
   constructor(private http: HttpClient) {
   }

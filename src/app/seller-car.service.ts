@@ -15,8 +15,8 @@ export class SellerCarService {
   authenticated = false;
   httpOptions = {};
 
-  private baseCarDealershipAppUrl = '//localhost:8080';
-  private carSellerDealershipAppUrl = '//localhost:8080/seller';
+  private baseCarDealershipAppUrl = '//car-dealership.herokuapp.com';
+  private carSellerDealershipAppUrl = '//car-dealership.herokuapp.com/seller';
 
   constructor(
     private http: HttpClient,
